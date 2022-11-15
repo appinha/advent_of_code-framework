@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, '..')
-from aoc_framework.lib.timer import Timer
+from timer import Timer
 from importlib.machinery import SourceFileLoader
 from termcolor import colored
 
