@@ -74,7 +74,7 @@ def _get_raw_input(day: str, is_testing: bool, delimiter: str):
             tests.append(test)
         return tests
 
-    file_content = get_file_content
+    file_content = get_file_content()
     if is_testing:
         parts = separate_parts(file_content)
         return {part: get_tests(string) for part, string in parts.items()}
