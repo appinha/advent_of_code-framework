@@ -1,17 +1,17 @@
 INPUT
-:-> solution=0 <-:
+:-> solution=? <-:
 
 <--->
 
 INPUT
-:-> solution=0 <-:
+:-> solution=? <-:
 
 <===>
 
 INPUT
-:-> solution=0 <-:
+:-> solution=? <-:
 
 <--->
 
 INPUT
-:-> solution=0 <-:
+:-> solution=? <-:
