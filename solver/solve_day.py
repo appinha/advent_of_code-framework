@@ -1,9 +1,9 @@
 import sys
 sys.path.insert(0, '..')
 import re
-from timer import Timer
 from importlib.machinery import SourceFileLoader
 from termcolor import colored
+from timer import Timer
 
 
 def solve_puzzles(day: str, part: str | None, is_testing: bool):
@@ -108,10 +108,9 @@ def _print_solution_for_part(solver, part: str, is_testing: bool):
     solving_function = solver.solve_part_1 if part == "1" else solver.solve_part_2
 
     def print_solution(label: str, raw_input: str, solution: str | None=None):
-        solver.get_input_into_self(raw_input)
         print(
             colored(label, 'cyan'),
-            solving_function(),
+            solving_function(raw_input),
             colored("(" + str(solution) + ")" if solution else "", 'green')
         )
 
