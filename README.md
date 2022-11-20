@@ -27,7 +27,8 @@
 This framework was developed to automate repetitive tasks when solving 🌟 Advent of Code 🎄 puzzles, such as:
 - creating the necessary files for solving the puzzles of a given day;
 - reading and formatting the input text;
-- running the solving code for a given day, both for one's personal input and testing inputs.
+- running the solving code for a given day, both for one's personal input and testing inputs;
+- testing of multiple different inputs.
 
 Future improvements include: automating the downloading of the personal input and opening of the webpage of a given day puzzle.
 
@@ -79,7 +80,7 @@ my_solutions
 
 For your **personal input**, just copy it from the AoC website and paste it into the `input.txt` file.
 
-For **testing inputs**, add them into the `input_test.txt` file in substitution of the text `INPUT` and add the expected result in substitution of the `?` character. The line `<--->` is used to separate inputs for a given puzzle part, while the line `<===>` separates inputs from each puzzle part. In the example below, there are 3 testing inputs for part 1 and 2 testing inputs for part 2:
+For **testing inputs**, add them in the `input_test.txt` file in substitution of the text `INPUT` and add the expected result in substitution of the `?` character. The line `<--->` is used to separate inputs for a given puzzle part, while the line `<===>` separates inputs from each puzzle part. In the example below, there are 3 testing inputs for part 1 and 2 testing inputs for part 2:
 
 ```
 2x3x4
@@ -109,7 +110,7 @@ For **testing inputs**, add them into the `input_test.txt` file in substitution 
 
 _(test inputs for AoC 2015 day 02 puzzle)_
 
-**3. Write the solving code into the `main.py` file**
+**3. Write the solving code in the `main.py` file**
 
 The solving code for each part of the puzzle have to be written as the methods `solve_part_1` and `solve_part_2` of the `DayPuzzleSolver` class:
 
