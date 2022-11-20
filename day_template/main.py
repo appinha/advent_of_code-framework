@@ -1,3 +1,5 @@
+import sys; sys.path.insert(0, '..')
+import aoc_lib as lib
 from pprint import pprint
 
 
