@@ -3,11 +3,11 @@
 </h1>
 
 <p align="center">
-	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/appinha/advent_of_code-framework?color=blueviolet" />
-	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/appinha/advent_of_code-framework?color=blueviolet" />
-	<img alt="Code language count" src="https://img.shields.io/github/languages/count/appinha/advent_of_code-framework?color=blue" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/appinha/advent_of_code-framework?color=blue" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/appinha/advent_of_code-framework?color=brightgreen" />
+	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/appinha/aoc-framework?color=blueviolet" />
+	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/appinha/aoc-framework?color=blueviolet" />
+	<img alt="Code language count" src="https://img.shields.io/github/languages/count/appinha/aoc-framework?color=blue" />
+	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/appinha/aoc-framework?color=blue" />
+	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/appinha/aoc-framework?color=brightgreen" />
 </p>
 
 <h3 align="center">
@@ -61,7 +61,7 @@ $ cd aoc_framework
 make new day=01
 ```
 
-_Note: the `make` commands have to be run from the cloned folder root, i.e. from where the `Makefile` is placed._
+_Note: the `make` commands have to be run from the cloned folder's root, i.e. from where the `Makefile` is placed._
 
 The resulting folder structure should be:
 ```
@@ -162,7 +162,7 @@ make test day=12 part=1
 
 ## 📑 Contents
 
-* `Makefile` - used for running the solver script for a given day.
+* `Makefile` - used for duplicating the day template folder and running the solver script for a given day.
 
 ### 📂 day_template
 
