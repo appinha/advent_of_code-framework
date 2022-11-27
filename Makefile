@@ -7,11 +7,30 @@
 
 SOLVER = solver/solve_day.py
 
+DAY_ERROR = echo "❌ Error: day must be a number between 1 and 25"
+COPY_ERROR = echo "❌ Error: folder already exists"
+COPY_SUCCESS = echo "✅ Successfully created day_$(day) folder!"
+
+CHECK_DAY = (($(day) >= 1 && $(day) <= 25))
+CHECK_FOLDER = [ ! -d ../day_$(day)/ ]
+
+COPY_TEMPLATE_FOLDER = cp -R day_template ../day_$(day)/ && $(COPY_SUCCESS)
+
+GET_INPUT = python solver/get_input.py $(day)
+
+TRY_TO_COPY_FOLDER_AND_GET_INPUT = if $(CHECK_FOLDER); then $(COPY_TEMPLATE_FOLDER) && $(GET_INPUT); else $(COPY_ERROR); fi
+
 all:
-	@PYTHONPATH=.:$PYTHONPATH python $(SOLVER) not_testing $(day) $(part)
+	@python $(SOLVER) not_testing $(day) $(part)
 
+.PHONY: test
 test:
-	@PYTHONPATH=".:$PYTHONPATH" python $(SOLVER) testing $(day) $(part)
+	@python $(SOLVER) testing $(day) $(part)
 
+.PHONY: new
 new:
-	@[ ! -d ../day_$(day)/ ] && cp -R day_template ../day_$(day)/
+	@if $(CHECK_DAY); then $(TRY_TO_COPY_FOLDER_AND_GET_INPUT); else $(DAY_ERROR); fi
+
+.PHONY: input
+input:
+	@$(GET_INPUT)

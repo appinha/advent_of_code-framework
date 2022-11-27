@@ -26,11 +26,12 @@
 
 This framework was developed to automate repetitive tasks when solving 🌟 Advent of Code 🎄 puzzles, such as:
 - creating the necessary files for solving the puzzles of a given day;
+- downloading the personal input;
 - reading and formatting the input text;
 - running the solving code for a given day, both for one's personal input and testing inputs;
 - testing of multiple different inputs.
 
-Future improvements include: automating the downloading of the personal input and opening of the webpage of a given day puzzle.
+Future improvements include: opening of the webpage of a given day puzzle.
 
 ## 🛠️ Usage
 
@@ -46,20 +47,45 @@ Future improvements include: automating the downloading of the personal input an
 
 ```shell
 $ cd advent_of_code-2015/my_solutions
-$ git clone https://github.com/appinha/advent_of_code-framework.git aoc_framework
+$ git clone https://github.com/appinha/aoc_framework.git
 ```
+
+**1. Create the config.ini file**
+
+To enable automated downloading of your personal input from the AoC website, your AoC folder must contain a `config.ini` file with the following content:
+
+```config
+[aoc_settings]
+year=2021
+session_cookie=1234567890
+```
+
+The resulting folder structure should be:
+```
+my_solutions
+  aoc_framework
+    ...
+  config.ini
+```
+
+_**Note:** to get your session cookie, open the AoC website and log in to your account; open DevTools (inspect) and go to the "Application" tab; on the left menu, under "Storage", click on "Cookies", then on the AoC url; from the table, copy the value of the "session" entry._
+
+![Screenshot of Application tab in Chrome DevTools](img/session_cookie.png)
+
+**2. Create a new day folder from template**
 
 Go into the cloned folder:
 
 ```shell
 $ cd aoc_framework
 ```
-
-**1. Create a new day folder from template**
+and run:
 
 ```shell
 make new day=01
 ```
+
+![Output from running `make new day=01`](img/make_new.png)
 
 _Note: the `make` commands have to be run from the cloned folder's root, i.e. from where the `Makefile` is placed._
 
@@ -68,6 +94,7 @@ The resulting folder structure should be:
 my_solutions
   aoc_framework
     ...
+  config.ini
   day_01
     input_test.txt
     input.txt
@@ -76,9 +103,15 @@ my_solutions
     solutions.txt
 ```
 
-**2. Fill in the input files**
+**3. Fill in the input files**
 
-For your **personal input**, just copy it from the AoC website and paste it into the `input.txt` file.
+For your **personal input**, upon creating a new day folder from template, it is automatically downloaded from the AoC website and pasted into the `input.txt` file.
+
+If an error occurred while downloading your input upon creating the new day folder, you can try again with:
+
+```shell
+make input day=01
+```
 
 For **testing inputs**, add them in the `input_test.txt` file in substitution of the text `INPUT` and add the expected result in substitution of the `?` character. The line `<--->` is used to separate inputs for a given puzzle part, while the line `<===>` separates inputs from each puzzle part. In the example below, there are 3 testing inputs for part 1 and 2 testing inputs for part 2:
 
@@ -110,7 +143,7 @@ For **testing inputs**, add them in the `input_test.txt` file in substitution of
 
 _(test inputs for AoC 2015 day 02 puzzle)_
 
-**3. Write the solving code in the `main.py` file**
+**4. Write the solving code in the `main.py` file**
 
 The solving code for each part of the puzzle have to be written as the methods `solve_part_1` and `solve_part_2` of the `DayPuzzleSolver` class:
 
@@ -132,13 +165,15 @@ The `self.delimiter` parameter determines how the text from the input file shoul
 - `"\n"` - to be used when the input should be broken down line by line, i.e. `raw_input` will be a list of strings (lines).
 - `"\n\n"` - to be used when the input is written in blocks and should be broken down by so, i.e. `raw_input` will be a list of strings (blocks of lines).
 
-**4. Run the puzzle solver**
+**5. Run the puzzle solver**
 
 for a certain day (both parts):
 
 ```shell
 make day=02
 ```
+
+![Output from running `make day=01`](img/make_day.png)
 
 for a certain day and part:
 
@@ -159,6 +194,8 @@ make test day=12
 ```shell
 make test day=12 part=1
 ```
+
+![Output from running `make test day=01`](img/make_test.png)
 
 ## 📑 Contents
 
