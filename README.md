@@ -89,7 +89,7 @@ $ cd aoc_framework
 and run:
 
 ```shell
-make new day=01
+$ make new day=01
 ```
 
 ![Output from running `make new day=01`](img/make_new.png)
@@ -117,7 +117,7 @@ For your **personal input**, upon creating a new day folder from template, it is
 If an error occurred while downloading your input upon creating the new day folder, you can try again with:
 
 ```shell
-make input day=01
+$ make input day=01
 ```
 
 For **testing inputs**, add them in the `input_test.txt` file in substitution of the text `INPUT` and add the expected result in substitution of the `?` character. The line `<--->` is used to separate inputs for a given puzzle part, while the line `<===>` separates inputs from each puzzle part. In the example below, there are 3 testing inputs for part 1 and 2 testing inputs for part 2:
@@ -177,7 +177,7 @@ The `self.delimiter` parameter determines how the text from the input file shoul
 for a certain day (both parts):
 
 ```shell
-make day=02
+$ make day=02
 ```
 
 ![Output from running `make day=01`](img/make_day.png)
@@ -185,21 +185,21 @@ make day=02
 for a certain day and part:
 
 ```shell
-make day=04 part=1
+$ make day=04 part=1
 ```
 
 ```shell
-make day=08 part=2
+$ make day=08 part=2
 ```
 
 for testing input:
 
 ```shell
-make test day=12
+$ make test day=12
 ```
 
 ```shell
-make test day=12 part=1
+$ make test day=12 part=1
 ```
 
 ![Output from running `make test day=01`](img/make_test.png)
