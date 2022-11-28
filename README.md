@@ -26,7 +26,7 @@
 
 This framework was developed to automate repetitive tasks when solving 🌟 Advent of Code 🎄 puzzles, such as:
 - creating the necessary files for solving the puzzles of a given day;
-- downloading the personal input;
+- downloading one's personal input;
 - reading and formatting the input text;
 - running the solving code for a given day, both for one's personal input and testing inputs;
 - testing of multiple different inputs.
@@ -43,14 +43,21 @@ Future improvements include: opening of the webpage of a given day puzzle.
 
 ### Instructions
 
-**0. Git clone this repo into your AoC folder**
+0. [Git clone this repo into your AoC folder](#0-git-clone-this-repo-into-your-aoc-folder)
+1. [Create the config.ini file](#1-create-the-configini-file)
+2. [Create a new day folder from template](#2-create-a-new-day-folder-from-template)
+3. [Fill in the input files](#3-fill-in-the-input-files)
+4. [Write the solving code in the `main.py` file](#4-write-the-solving-code-in-the-mainpy-file)
+5. [Run the puzzle solver](#5-run-the-puzzle-solver)
+
+#### 0. Git clone this repo into your AoC folder
 
 ```shell
 $ cd advent_of_code-2015/my_solutions
 $ git clone https://github.com/appinha/aoc_framework.git
 ```
 
-**1. Create the config.ini file**
+#### 1. Create the config.ini file
 
 To enable automated downloading of your personal input from the AoC website, your AoC folder must contain a `config.ini` file with the following content:
 
@@ -72,7 +79,7 @@ _**Note:** to get your session cookie, open the AoC website and log in to your a
 
 ![Screenshot of Application tab in Chrome DevTools](img/session_cookie.png)
 
-**2. Create a new day folder from template**
+#### 2. Create a new day folder from template
 
 Go into the cloned folder:
 
@@ -103,7 +110,7 @@ my_solutions
     solutions.txt
 ```
 
-**3. Fill in the input files**
+#### 3. Fill in the input files
 
 For your **personal input**, upon creating a new day folder from template, it is automatically downloaded from the AoC website and pasted into the `input.txt` file.
 
@@ -143,7 +150,7 @@ For **testing inputs**, add them in the `input_test.txt` file in substitution of
 
 _(test inputs for AoC 2015 day 02 puzzle)_
 
-**4. Write the solving code in the `main.py` file**
+#### 4. Write the solving code in the `main.py` file
 
 The solving code for each part of the puzzle have to be written as the methods `solve_part_1` and `solve_part_2` of the `DayPuzzleSolver` class:
 
@@ -165,7 +172,7 @@ The `self.delimiter` parameter determines how the text from the input file shoul
 - `"\n"` - to be used when the input should be broken down line by line, i.e. `raw_input` will be a list of strings (lines).
 - `"\n\n"` - to be used when the input is written in blocks and should be broken down by so, i.e. `raw_input` will be a list of strings (blocks of lines).
 
-**5. Run the puzzle solver**
+#### 5. Run the puzzle solver
 
 for a certain day (both parts):
 
