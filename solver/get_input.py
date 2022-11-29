@@ -5,18 +5,8 @@ import urllib.request
 from configparser import MissingSectionHeaderError
 from urllib.error import HTTPError
 
+from utils import check_day, error, get_puzzle_url
 
-def check_day(day: str):
-    try:
-        day = int(day)
-    except ValueError:
-        error("please provide a valid number for day")
-    if not (1 <= day <= 25):
-        error("day must be a number between 1 and 25")
-
-
-def get_url(day: str, year: str):
-    return f"https://adventofcode.com/{year}/day/{str(int(day))}"
 
 def get_config():
     config = configparser.ConfigParser()
@@ -33,7 +23,7 @@ def get_config():
 
 def download_challenge(day: str, year: str, session_cookie: str):
     input_file_path = f"../day_{day}/input.txt"
-    url = get_url(day, year) + "/input"
+    url = get_puzzle_url(day, year) + "/input"
 
     request = urllib.request.Request(url)
     request.add_header("Cookie", f"session={session_cookie}")
@@ -50,11 +40,6 @@ def download_challenge(day: str, year: str, session_cookie: str):
             raise
 
 
-def error(msg: str):
-    print(f"❌ Error: {msg}")
-    exit()
-
-
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         error("no day was provided for downloading input")
@@ -65,4 +50,4 @@ if __name__ == '__main__':
         year, session_cookie = get_config()
         download_challenge(day, year, session_cookie)
         print(f"✅ Successfully downloaded input!")
-        print(f"🔗 Access the puzzle on {get_url(day, year)}")
+        print(f"🔗 Access the puzzle on {get_puzzle_url(day, year)}")
