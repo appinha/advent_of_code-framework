@@ -5,8 +5,10 @@ from importlib.machinery import SourceFileLoader
 from termcolor import colored
 from timer import Timer
 
+from utils import check_day, check_part, error, get_puzzle_url
 
-def solve_puzzles(day: str, part: str | None, is_testing: bool):
+
+def solve_puzzles(day: int, part: int | None, is_testing: bool):
     _print_title(day, is_testing)
 
     puzzle_solver = _get_puzzle_solver(day)
@@ -16,17 +18,17 @@ def solve_puzzles(day: str, part: str | None, is_testing: bool):
     if part:
         _solve_part(puzzle_solver, part, is_testing)
     else:
-        _solve_part(puzzle_solver, '1', is_testing)
-        _solve_part(puzzle_solver, '2', is_testing)
+        _solve_part(puzzle_solver, 1, is_testing)
+        _solve_part(puzzle_solver, 2, is_testing)
     print()
 
 
-def _print_title(day: str, is_testing: bool):
+def _print_title(day: int, is_testing: bool):
     if is_testing:
         title = "Running tests"
         color = "red"
     else:
-        title = f"Solution(s) for Day {day}"
+        title = f"Solution(s) for Day {str(day)}"
         color = "green"
     print(
         colored("\n\n*** ", 'yellow'),
@@ -35,7 +37,7 @@ def _print_title(day: str, is_testing: bool):
     )
 
 
-def _get_puzzle_solver(day: str):
+def _get_puzzle_solver(day: int):
 
     def import_main(main_path):
         return SourceFileLoader("main.py", main_path).load_module()
@@ -44,7 +46,7 @@ def _get_puzzle_solver(day: str):
     return main.DayPuzzleSolver()
 
 
-def _get_raw_input(day: str, is_testing: bool, delimiter: str):
+def _get_raw_input(day: int, is_testing: bool, delimiter: str):
 
     def get_file_content():
         input_path = _build_input_path(day, is_testing)
@@ -60,7 +62,7 @@ def _get_raw_input(day: str, is_testing: bool, delimiter: str):
             parts = file_content.split("\n\n<===>\n\n")
         else:
             parts = [file_content, file_content]
-        return {"1": parts[0], "2": parts[1]}
+        return {1: parts[0], 2: parts[1]}
 
     def get_tests(string):
         raw_tests = string.split("\n\n<--->\n\n")
@@ -81,7 +83,7 @@ def _get_raw_input(day: str, is_testing: bool, delimiter: str):
     return split_raw_input(file_content)
 
 
-def _get_solutions(day: str):
+def _get_solutions(day: int):
     filename = _build_solutions_path(day)
     try:
         with open(filename, 'r') as f:
@@ -91,8 +93,8 @@ def _get_solutions(day: str):
         return None
 
 
-def _solve_part(puzzle_solver, part: str, is_testing: bool):
-    print(colored(f"\n--- Part {part} ---\n", 'magenta'))
+def _solve_part(puzzle_solver, part: int, is_testing: bool):
+    print(colored(f"\n--- Part {str(part)} ---\n", 'magenta'))
 
     timer = Timer()
 
@@ -104,8 +106,8 @@ def _solve_part(puzzle_solver, part: str, is_testing: bool):
         print(colored(f"\nTime: {timer.elapsed_sec:.2f} seconds.\n", 'blue'))
 
 
-def _print_solution_for_part(solver, part: str, is_testing: bool):
-    solving_function = solver.solve_part_1 if part == "1" else solver.solve_part_2
+def _print_solution_for_part(solver, part: int, is_testing: bool):
+    solving_function = solver.solve_part_1 if part == 1 else solver.solve_part_2
 
     def print_solution(label: str, raw_input: str, solution: str | None=None):
         print(
@@ -122,26 +124,26 @@ def _print_solution_for_part(solver, part: str, is_testing: bool):
         print_solution("Solution =", solver.raw_input, solution)
 
 
-def _build_input_path(day: str, is_testing: bool):
+def _build_input_path(day: int, is_testing: bool):
     directory = _get_directory_name(day)
     input_filename = "input_test.txt" if is_testing else "input.txt"
     return directory + input_filename
 
 
-def _build_solutions_path(day: str):
+def _build_solutions_path(day: int):
     directory = _get_directory_name(day)
     return directory + "solutions.txt"
 
 
-def _build_main_path(day: str):
+def _build_main_path(day: int):
     directory = _get_directory_name(day)
     return directory + "main.py"
 
 
-def _get_directory_name(day: str):
+def _get_directory_name(day: int):
 
-    def normalize_day(arg: str):
-        return arg if len(arg) > 1 else "0" + arg
+    def normalize_day(day: int):
+        return day if day > 9 else "0" + str(day)
 
     return "../day_" + normalize_day(day) + "/"
 
@@ -149,14 +151,17 @@ def _get_directory_name(day: str):
 if __name__ == '__main__':
     if len(sys.argv) < 3:
         print("Usage examples:")
-        print("$ make day=01")
-        print("$ make day=04 part=1")
-        print("$ make test day=08")
+        print("$ make day=1")
+        print("$ make day=4 part=1")
+        print("$ make test day=8")
         print("$ make test day=12 part=2")
-        print("$ make new day=01")
+        print("$ make new day=1")
     else:
         is_testing = sys.argv[1] == "testing"
-        day = sys.argv[2]
-        part = sys.argv[3] if len(sys.argv) > 3 else None
+        day = int(sys.argv[2])
+        check_day(day)
+        part = int(sys.argv[3]) if len(sys.argv) > 3 else None
+        if part != None:
+            check_part(part)
 
         solve_puzzles(day, part, is_testing)
