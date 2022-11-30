@@ -143,7 +143,7 @@ def _build_main_path(day: int):
 def _get_directory_name(day: int):
 
     def normalize_day(day: int):
-        return day if day > 9 else "0" + str(day)
+        return str(day) if day > 9 else "0" + str(day)
 
     return "../day_" + normalize_day(day) + "/"
 
