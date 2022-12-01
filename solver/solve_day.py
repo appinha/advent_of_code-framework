@@ -109,11 +109,14 @@ def _solve_part(puzzle_solver, part: int, is_testing: bool):
 def _print_solution_for_part(solver, part: int, is_testing: bool):
     solving_function = solver.solve_part_1 if part == 1 else solver.solve_part_2
 
-    def print_solution(label: str, raw_input: str, solution: str | None=None):
+    def print_solution(label: str, raw_input: str, expected_solution: str | None=None):
+        solution = solving_function(raw_input)
+        expected = "(" + str(expected_solution) + ")" if expected_solution else ""
+        colour = 'green' if str(solution) == str(expected_solution) else 'red'
         print(
             colored(label, 'cyan'),
-            solving_function(raw_input),
-            colored("(" + str(solution) + ")" if solution else "", 'green')
+            solution,
+            colored(expected + (" ✓" if colour == 'green' else " X"), colour)
         )
 
     if is_testing:
