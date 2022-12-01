@@ -16,6 +16,14 @@ def check_part(part: str):
         error("part must be a number between 1 and 2")
 
 
+def normalize_day(day: str | int):
+    return str(day) if int(day) > 9 else "0" + str(day)
+
+
+def build_directory_name(day: str | int):
+    return "../day_" + normalize_day(day) + "/"
+
+
 def error(msg: str):
     print(f"❌ Error: {msg}")
     exit()

@@ -5,7 +5,7 @@ import urllib.request
 from configparser import MissingSectionHeaderError
 from urllib.error import HTTPError
 
-from utils import check_day, error, get_puzzle_url
+from utils import check_day, error, get_puzzle_url, normalize_day
 
 
 def get_config():
@@ -46,8 +46,10 @@ if __name__ == '__main__':
     else:
         day = sys.argv[1]
         check_day(day)
+
         print(f"📥 Downloading input for day {day}...")
         year, session_cookie = get_config()
-        download_challenge(day, year, session_cookie)
+        download_challenge(normalize_day(day), year, session_cookie)
         print(f"✅ Successfully downloaded input!")
+
         print(f"🔗 Access the puzzle on {get_puzzle_url(day, year)}")

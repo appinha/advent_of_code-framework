@@ -5,7 +5,7 @@ from importlib.machinery import SourceFileLoader
 from termcolor import colored
 from timer import Timer
 
-from utils import check_day, check_part, error, get_puzzle_url
+from utils import build_directory_name, check_day, check_part, error
 
 
 def solve_puzzles(day: int, part: int | None, is_testing: bool):
@@ -128,43 +128,33 @@ def _print_solution_for_part(solver, part: int, is_testing: bool):
 
 
 def _build_input_path(day: int, is_testing: bool):
-    directory = _get_directory_name(day)
+    directory = build_directory_name(day)
     input_filename = "input_test.txt" if is_testing else "input.txt"
     return directory + input_filename
 
 
 def _build_solutions_path(day: int):
-    directory = _get_directory_name(day)
+    directory = build_directory_name(day)
     return directory + "solutions.txt"
 
 
 def _build_main_path(day: int):
-    directory = _get_directory_name(day)
+    directory = build_directory_name(day)
     return directory + "main.py"
-
-
-def _get_directory_name(day: int):
-
-    def normalize_day(day: int):
-        return str(day) if day > 9 else "0" + str(day)
-
-    return "../day_" + normalize_day(day) + "/"
 
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        print("Usage examples:")
-        print("$ make day=1")
-        print("$ make day=4 part=1")
-        print("$ make test day=8")
-        print("$ make test day=12 part=2")
-        print("$ make new day=1")
+        error("no day was provided for solving puzzles")
     else:
         is_testing = sys.argv[1] == "testing"
-        day = int(sys.argv[2])
+        day = sys.argv[2]
         check_day(day)
-        part = int(sys.argv[3]) if len(sys.argv) > 3 else None
+        day = int(day)
+
+        part = sys.argv[3] if len(sys.argv) > 3 else None
         if part != None:
             check_part(part)
+            part = int(part)
 
         solve_puzzles(day, part, is_testing)
