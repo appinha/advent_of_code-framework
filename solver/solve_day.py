@@ -111,12 +111,13 @@ def _print_solution_for_part(solver, part: int, is_testing: bool):
 
     def print_solution(label: str, raw_input: str, expected_solution: str | None=None):
         solution = solving_function(raw_input)
-        expected = "(" + str(expected_solution) + ")" if expected_solution else ""
         colour = 'green' if str(solution) == str(expected_solution) else 'red'
+        expected = "(" + str(expected_solution) + ")" if expected_solution else ""
+        sign = (" ✓" if colour == 'green' else " X") if expected else ""
         print(
             colored(label, 'cyan'),
             solution,
-            colored(expected + (" ✓" if colour == 'green' else " X"), colour)
+            colored(expected + sign, colour)
         )
 
     if is_testing:
