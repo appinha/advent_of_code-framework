@@ -88,7 +88,15 @@ def _get_solutions(day: int):
     try:
         with open(filename, 'r') as f:
             file_content = f.read()
-            return re.findall(r'"(.+?)"',file_content)
+            solutions = re.findall(r'"(.+?)"',file_content)
+
+            if len(solutions) == 1:
+                if 'Part 1 = ""' in file_content:
+                    solutions = ["", solutions[0]]
+                else:
+                    solutions = [solutions[0], ""]
+
+            return solutions[:2]
     except:
         return None
 
