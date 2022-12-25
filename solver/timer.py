@@ -24,6 +24,10 @@ class Timer:
     def elapsed_sec(self) -> float:
         return self.elapsed_nanosec / 1e9
 
+    @property
+    def elapsed_min(self) -> float:
+        return self.elapsed_sec / 60
+
     def _get_time(self) -> int:
         return time.perf_counter_ns()
 

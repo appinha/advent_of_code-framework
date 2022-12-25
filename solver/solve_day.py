@@ -111,7 +111,10 @@ def _solve_part(puzzle_solver, part: int, is_testing: bool):
     timer.stop()
 
     if not is_testing:
-        print(colored(f"\nTime: {timer.elapsed_sec:.2f} seconds.\n", 'blue'))
+        if timer.elapsed_sec < 60:
+            print(colored(f"\nTime: {timer.elapsed_sec:.2f} seconds.\n", 'blue'))
+        else:
+            print(colored(f"\nTime: {timer.elapsed_min:.2f} minutes.\n", 'blue'))
 
 
 def _print_solution_for_part(solver, part: int, is_testing: bool):
